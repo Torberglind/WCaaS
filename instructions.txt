@@ -1,0 +1,22 @@
+Activate enviroment (if needed)
+
+Download tweets
+and unpack tweets
+
+$ cd WCaaS
+$ wget https://uppsala.box.com/s/qiiggdjd98241wm7rl3lqehfhyjomg4y
+$ sudo apt-get install unrar
+$ unrar data.rar
+
+$ rabbitmq-server --help
+    to start rabbitmq
+
+$ celery -A tasks worker --loglevel=info
+    to start celery worker
+
+modify WCaaS and insert public IP at '0.0.0.0'
+
+$ python3 WCaaS
+    to start flask app
+
+curl -i <public-ip>:5000/WCaaS/api/v1.0/count
