@@ -9,16 +9,16 @@ app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
 app.config_from_object('celeryconfig')
 
 @app.task
-def count():
+def count(filepath):
     wordcounter = ["han", "hon", "den", "det", "denne", "denna", "hen"]
     dictpronoun = {}
     for pronoun in wordcounter:
         dictpronoun[pronoun] = 0
-    dirpath = './data'
     tweet_counter = 0
-    for file in os.listdir(dirpath):
+    """for file in os.listdir(dirpath):
         filepath = dirpath + "/" + file
-        with open (filepath, 'r') as tweet:
+    """
+    with open (filepath, 'r') as tweet:
             for line in tweet:
                 try:
                     tweet = json.loads(line)
