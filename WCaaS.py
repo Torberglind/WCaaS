@@ -3,6 +3,7 @@ from tasks import count, sumdict
 import os
 from flask import Flask, jsonify
 from celery import chord
+import datetime
 
 app = Flask(__name__)
 
@@ -12,7 +13,7 @@ def WCaaS():
     result = count.delay()
     return jsonify((result.get()))
     """
-
+    start = datetime.now()
     header = []
     dirpath = '../data'
     for file in os.listdir(dirpath):
@@ -22,7 +23,8 @@ def WCaaS():
     callback = sumdict.s()
     result = chord(header)(callback)
     ret = jsonify(result.wait())
-
+    stop = datetime.now()
+    print (stop - start)
     return ret
 
 
