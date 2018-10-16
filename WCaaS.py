@@ -24,7 +24,7 @@ def WCaaS():
     callback = sumdict.s()
     result = chord(header)(callback)
     ret = jsonify(result.wait())
-    stop = datetime.()
+    stop = datetime.today()
     print (stop - start)
     return ret
 
