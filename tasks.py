@@ -1,10 +1,9 @@
 from celery import Celery
 
-import os
 import json
 import re
 
-app = Celery('tasks', backend='rpc://', broker='pyamqp://guest@localhost//')
+app = Celery('tasks', backend='amqp', broker='pyamqp://guest@localhost//')
 
 app.config_from_object('celeryconfig')
 
@@ -36,3 +35,14 @@ def count(filepath):
                             dictpronoun[x[2:-2]]+=1
 
     return (dictpronoun)
+@app.task
+def sumdict(list):
+    wordcounter = ["han", "hon", "den", "det", "denne", "denna", "hen"]
+    dictpronoun = {}
+    for pronoun in wordcounter:
+        dictpronoun[pronoun] = 0
+    for dict in list:
+        for key in dict:
+            dictpronoun[key] += dict[key]
+
+    return dictpronoun

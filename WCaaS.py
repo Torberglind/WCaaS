@@ -1,21 +1,31 @@
 #!flask/bin/python
-from tasks import count
+from tasks import count, sumdict
 import os
 from flask import Flask, jsonify
+from celery import chord
+
 app = Flask(__name__)
 
 @app.route('/WCaaS/api/v1.0/count', methods=['GET'])
 def WCaaS():
-    """result = count.delay()
+    """
+    result = count.delay()
     return jsonify((result.get()))
     """
-    res = []
+
+    header = []
     dirpath = './data'
     for file in os.listdir(dirpath):
         filepath = dirpath + "/" + file
-        res.add(count.delay(filepath))
+        header.append(count.s(filepath))
 
-    return res
+    callback = sumdict.s()
+    result = chord(header)(callback)
+    ret = jsonify(result.wait())
+
+    return ret
+
+
 
 
 """
