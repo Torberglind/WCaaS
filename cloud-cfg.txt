@@ -1,0 +1,24 @@
+#cloud-config
+
+apt_update: true
+apt_upgrade: true
+packages:
+ - python-pip
+ - python-dev
+ - build-essential
+byobu_default: system
+
+
+runcmd:
+ - sudo apt-get -y update
+ - sudo apt-get -y install python3-pip
+ - pip3 install celery
+ - git clone https://github.com/Torberglind/WCaaS.git
+ - pip3 install flask
+ - pip3 install rabbitmq
+ - sudo apt -y install rabbitmq-server
+ - sudo rabbitmqctl add_user user password
+ - sudo rabbitmqctl add_vhost vhost
+ - sudo rabbitmqctl set_permissions -p vhost user ".*" ".*" ".*"
+ - sudo rabbitmqctl restart
+ - sudo echo "127.0.1.1 tor-c3-worker" >> /etc/hosts

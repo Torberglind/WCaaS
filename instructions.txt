@@ -24,9 +24,20 @@ curl -i <public-ip>:5000/WCaaS/api/v1.0/count
 
 
 Cloudinit:
+Cloudinit:
 sudo apt-get -y update
 sudo apt-get -y install python3-pip
-pip3 install -y celery
-git clone -y https://github.com/Torberglind/WCaaS.git
+pip3 install celery
+git clone https://github.com/Torberglind/WCaaS.git
 cd WCaaS
 curl --header 'Host: public.boxcloud.com' --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36' --header 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8' --header 'Accept-Language: en-US,en;q=0.9,sv;q=0.8,zh-TW;q=0.7,zh;q=0.6,de;q=0.5' 'https://public.boxcloud.com/d/1/b1!ynypeucVmYCTwcXoj-B39ickRueNZXrYUFjnRfcW7bK1mWMFcBmG-VwaW6yrTY70Jp1CO4jafhrVAh5OrRU7OgDLYvF6JPRkyqNzcyRQHIFgV_oN2lpcdpqM5-mrmgPEKgdeLCrWxdw0SwbExYpnEGZfKuESfwBN-2_4LqWTR6l0Yjr0de46ewamO73saneTvv4RGf42C4S65Dul0Ls2WxQitItt2kfPF97RG38hYpSn3kPNftIUTRURsTJb5KsIa0IltiW8_yLk25ePW-6N-OOab851T9TzqwGvokYSnSWj-dcQoPKxr8sCt0lPvZnsn5t69ePsNUZoKq9ZBpiIfFmaDayZlx25Ror0FEYfgC2HJrOI27x5IRZ7HXOje2Zh5mXlulvUDIYC8upEqDVARMIXZfKkC39_RtAqIk6jNuifla8X06YNxNCG8bXZ-CL1AXEAwn2Iy_VAv-xZKrX_-TwrsMrWHEhTg3DqmKkPlvP4TbQ6qWWXr5CQO5xLN5hmWeLDiygrR47sp2R2q8gXpYNHl_7B0r_IbHOY_e87I_Z88Lnedd3dDOcdZz-4ni-CZh6VuQ_xjocQx1seKPFVvJXZwt1mNZIJ4ukuDbGeeKQRv9Ffxce9wd4nqRUxYmCpafnHzWntrTpL_mrCIYGbQcvtWaJWIsSjy6g0yBdeCnupZjMiZO_EzlqQCpjIHQ04gno3cBpsioVGpezeMedaSpOlMY4G76Tz9T-QIMK7oBqHO2dOneZRYFCsPjlV_f8iDqiQdOJy1zKGvKvJQPywqLOi_S2VDN0TO67Q639LqvYsgOWGn2gpfQmwpAs2a_Bm7CPn4gtzhWCqLKNmPb6t-cF5Jwvh-vuGUdEkkipgx8WJ0v6ZQAcakmtq7Ni-TIMnQnlCQ-PL6xnjtAChrqLtVvs1aw0BROspISQ4YaCDFRa-AAqk_R60HKeMijFMCXa6xc3iti1bNfNYZt0woIvc2KlBhwjKGXQsy12ZC21ybQivwwLuW_Bf3FFuNSPgEKdy4YJFXHf9DaylcynE-fYD6ybBdivMq-r6vvIGZecRXqm2ys3zM4dS01gbhi8QO8-OYZLtvrW034LZpGBiuo66py_nG2EQo6l2swjhXNdCn0zvQE09OpZkdPMlMs1WNg0i4c94Ne3OM17muujgOTtzjyG7UzCrN9kjqdeOikbeMQnQPg7F4gtJtROA-xacGMZAQF-G11l-gEuZ1BIwIpnLdEsCqUU2zuuwyw../download' -o 'data.tar.gz' -L
+pip3 install flask
+pip3 install rabbitmq
+sudo apt -y install rabbitmq-server
+sudo rabbitmqctl add_user user password
+sudo rabbitmqctl add_vhost vhost
+sudo rabbitmqctl set_permissions -p vhost user ".*" ".*" ".*"
+sudo rabbitmqctl restart
+cd ..
+cd ..
+echo > 127.0.1.1 edvin-c3
