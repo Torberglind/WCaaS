@@ -3,9 +3,7 @@ from celery import Celery
 import json
 import re
 
-app = Celery('tasks', backend='amqp', broker='pyamqp://guest@localhost//')
-
-app.config_from_object('celeryconfig')
+app = Celery('tasks', backend='amqp', broker='pyamqp://user:password@192.168.1.33:5672/vhost')
 
 @app.task
 def count(filepath):

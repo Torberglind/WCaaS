@@ -14,7 +14,7 @@ def WCaaS():
     """
 
     header = []
-    dirpath = './data'
+    dirpath = '../data'
     for file in os.listdir(dirpath):
         filepath = dirpath + "/" + file
         header.append(count.s(filepath))
